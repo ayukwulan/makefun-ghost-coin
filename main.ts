@@ -1,5 +1,8 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
-const launch = JSON.parse(readFileSync("LAUNCH.json", "utf8"));
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+const dir = dirname(fileURLToPath(import.meta.url));
+const launch = JSON.parse(readFileSync(join(dir, "LAUNCH.json"), "utf8"));
 if (typeof launch.mint !== "string" || launch.mint.length === 0) {
   throw new Error("LAUNCH.json is missing a non-empty mint field");
 }
